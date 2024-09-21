@@ -1,0 +1,91 @@
+{
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"workspace": {
+		"prefix": "workspace",
+		"body": [
+			"// ",
+			"// ",
+			"// By - Shivoy Arora",
+			"// ",
+			"#include <iostream>",
+			"#include <vector>",
+			"",
+			"using namespace std;",
+			"",
+			"",
+			"////////////////////////////////////////////////////////////////////////////////",
+			"// Main Function",
+			"////////////////////////////////////////////////////////////////////////////////",
+			"int main(int argc, char** argv){",
+			"\t$0",
+			"",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "C++ code template"
+	},
+	"fastIO": {
+		"prefix": "fastIO",
+		"body": [
+			"////////////////////////////////////////////////////////////////////////////////",
+			"// Fast IO",
+			"////////////////////////////////////////////////////////////////////////////////",
+			"inline int read() {",
+			"    int x = 0, sign = 1;",
+			"    char c = getchar();",
+			"    while (!isdigit(c)) {",
+			"        if (c == '-') sign = -1;",
+			"        c = getchar();",
+			"    }",
+			"    while (isdigit(c)) {",
+			"        x = (x << 1) + (x << 3) + (c ^ 48);",
+			"        c = getchar();",
+			"    }",
+			"    return x * sign;",
+			"    }",
+			"",
+			"inline void read(string& s) {",
+			"    s.clear();",
+			"    char c = getchar();",
+			"    while (!isalnum(c)) c = getchar();",
+			"    while (isalnum(c)) {",
+			"        s += c;",
+			"        c = getchar();",
+			"    }",
+			"}",
+			"",
+			"inline void write(int x) {",
+			"    if (x < 0) {",
+			"        putchar('-');",
+			"        x = -x;",
+			"    }",
+			"    if (x > 9) write(x / 10);",
+			"    putchar(x % 10 + '0');",
+			"}",
+			"inline void write(string s) {",
+			"    for (char c : s) putchar(c);",
+			"}",
+		],
+		"description": "Fast IO"
+	},
+	"fastIOMain": {
+		"prefix": "fastIOmain",
+		"body": [
+			"ios_base::sync_with_stdio(false);",
+			"cin.tie(NULL);"
+		],
+		"description": "Fast IO to remove sync_with_stdio"
+	}
+}

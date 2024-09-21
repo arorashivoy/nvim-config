@@ -1,0 +1,14 @@
+-- -- vim.keymap.set('n', '<leader>ft', require('FTerm').toggle(), { desc = "Toggle Floating Terminal" })
+--
+-- require'FTerm'.setup({
+--     border = 'double',
+--     dimensions  = {
+--         height = 0.8,
+--         width = 0.8,
+--     },
+-- })
+--
+-- -- Example keybindings
+-- vim.keymap.set('n', '<C-i>', '<CMD>lua require("FTerm").toggle()<CR>')
+-- vim.keymap.set('t', '<C-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+--
