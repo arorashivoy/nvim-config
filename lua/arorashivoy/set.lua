@@ -37,3 +37,5 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 
 vim.cmd("set autoread")
+
+vim.cmd("set hlsearch")
