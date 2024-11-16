@@ -40,12 +40,11 @@ require("lazy").setup({
         "folke/neoconf.nvim",
         cmd = "Neoconf"
     },
-    "folke/neodev.nvim",
 
     -- Themes
     'navarasu/onedark.nvim',
     -- 'martinsione/darkplus.nvim',
-    { "catppuccin/nvim",                          name = "catppuccin" },
+    -- { "catppuccin/nvim",                          name = "catppuccin" },
 
 
     --------------------------
@@ -65,20 +64,15 @@ require("lazy").setup({
     -- Telescope BibTeX
     "nvim-telescope/telescope-bibtex.nvim",
     -- Telescope Project
-    'nvim-telescope/telescope-project.nvim',
+    -- 'nvim-telescope/telescope-project.nvim',
     -- Devicons for Telescope File Browser
     'nvim-tree/nvim-web-devicons',
     -- Telescope Fuzzy Find
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+    -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
 
 
     -- Treesitter
     { "nvim-treesitter/nvim-treesitter",          build = ":TSUpdate" },
-    'nvim-treesitter/playground',
-    "nvim-treesitter/nvim-treesitter-context",
-
-    -- Harpoon
-    'ThePrimeagen/harpoon',
 
     -- UndoTree
     'mbbill/undotree',
@@ -182,17 +176,17 @@ require("lazy").setup({
     'numToStr/Comment.nvim',
 
     -- Code Runner
-    { "CRAG666/code_runner.nvim",            config = true },
+    -- { "CRAG666/code_runner.nvim",            config = true },
 
     -- Vim-Tmux Navigator
-    {
-        'christoomey/vim-tmux-navigator',
-        lazy = false,
-    },
+    -- {
+    --     'christoomey/vim-tmux-navigator',
+    --     lazy = false,
+    -- },
 
     -- Custom Snippets
-    { 'saadparwaiz1/cmp_luasnip' },
-    { "rafamadriz/friendly-snippets" },
+    -- { 'saadparwaiz1/cmp_luasnip' },
+    -- { "rafamadriz/friendly-snippets" },
 
     -- Notify
     {
@@ -255,22 +249,17 @@ require("lazy").setup({
         },
     },
 
-    -- Toggle Diagnostics of LSP
-    'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
+    -- Disable plugins for large files
+    {
+        "LunarVim/bigfile.nvim",
+        event = "BufRead",
+        opts = {
+            -- Disable the plugin for files larger than 2MB
+            filesize = 2,
+        },
+        config = function(_, opts)
+            require("bigfile").setup(opts)
+        end,
+    },
 
-    -- -- flash (enhanxcing the search)
-    -- {
-    --     "folke/flash.nvim",
-    --     event = "VeryLazy",
-    --     ---@type Flash.Config
-    --     opts = {},
-    --     -- stylua: ignore
-    --     keys = {
-    --         { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-    --         { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-    --         { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-    --         { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    --         { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-    --     },
-    -- },
 })

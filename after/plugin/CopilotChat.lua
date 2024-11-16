@@ -24,7 +24,7 @@ require('CopilotChat').setup {
   clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
   highlight_selection = true, -- Highlight selection in the source buffer when in the chat window
 
-  context = nil, -- Default context to use, 'buffers', 'buffer' or none (can be specified manually in prompt via @).
+  context = 'buffer', -- Default context to use, 'buffers', 'buffer' or none (can be specified manually in prompt via @).
   history_path = vim.fn.stdpath('data') .. '/copilotchat_history', -- Default path to stored history
   callback = nil, -- Callback to use when ask response is received
 
