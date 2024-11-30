@@ -15,6 +15,51 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require("lazy").setup({
 
+    -- Snack
+    {
+      "folke/snacks.nvim",
+      priority = 1000,
+      lazy = false,
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        bigfile = { enabled = true },
+        quickfile = { enabled = true },
+        statuscolumn = { enabled = true },
+        words = { enabled = true },
+        bufdelete = { enabled = true },
+        dashboard = {
+          sections = {
+            { section = "header" },
+            {
+              pane = 2,
+              section = "terminal",
+              cmd = "colorscript -e square",
+              height = 5,
+              padding = 1,
+            },
+            { section = "keys", gap = 1, padding = 1 },
+            { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+            { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+            -- {
+            --   pane = 2,
+            --   icon = " ",
+            --   title = "Git Status",
+            --   section = "terminal",
+            --   -- enabled = Snacks.git.get_root() ~= nil,
+            --   cmd = "hub status --short --branch --renames",
+            --   height = 5,
+            --   padding = 1,
+            --   ttl = 5 * 60,
+            --   indent = 3,
+            -- },
+            { section = "startup" },
+          },
+        },
+      },
+    },
+
     -- default lazy plugins
     {
         "folke/which-key.nvim",
@@ -36,10 +81,10 @@ require("lazy").setup({
         },
     },
 
-    {
-        "folke/neoconf.nvim",
-        cmd = "Neoconf"
-    },
+    -- {
+    --     "folke/neoconf.nvim",
+    --     cmd = "Neoconf"
+    -- },
 
     -- Themes
     'navarasu/onedark.nvim',
@@ -63,11 +108,11 @@ require("lazy").setup({
     },
     -- Telescope BibTeX
     "nvim-telescope/telescope-bibtex.nvim",
-    -- Telescope Project
+    -- -- Telescope Project
     -- 'nvim-telescope/telescope-project.nvim',
     -- Devicons for Telescope File Browser
     'nvim-tree/nvim-web-devicons',
-    -- Telescope Fuzzy Find
+    -- -- Telescope Fuzzy Find
     -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
 
 
@@ -104,21 +149,7 @@ require("lazy").setup({
         'lewis6991/gitsigns.nvim',
         opts = {
             -- See `:help gitsigns.txt`
-            signs = {
-                add = { text = '+' },
-                change = { text = '~' },
-                delete = { text = '_' },
-                topdelete = { text = '‾' },
-                changedelete = { text = '~' },
-            },
-            on_attach = function(bufnr)
-                vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
-                    { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-                vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
-                    { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-                vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
-                    { buffer = bufnr, desc = '[P]review [H]unk' })
-            end,
+            max_file_length = 4000,
         },
     },
 
@@ -249,17 +280,17 @@ require("lazy").setup({
         },
     },
 
-    -- Disable plugins for large files
-    {
-        "LunarVim/bigfile.nvim",
-        event = "BufRead",
-        opts = {
-            -- Disable the plugin for files larger than 2MB
-            filesize = 2,
-        },
-        config = function(_, opts)
-            require("bigfile").setup(opts)
-        end,
-    },
+    -- -- Disable plugins for large files
+    -- {
+    --     "LunarVim/bigfile.nvim",
+    --     event = "BufRead",
+    --     opts = {
+    --         -- Disable the plugin for files larger than 2MB
+    --         filesize = 2,
+    --     },
+    --     config = function(_, opts)
+    --         require("bigfile").setup(opts)
+    --     end,
+    -- },
 
 })

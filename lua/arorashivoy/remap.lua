@@ -20,10 +20,13 @@ vim.keymap.set("n", "<C-l>", vim.cmd.TmuxNavigateRight, { desc = "Navigate Right
 vim.keymap.set("n", "<M-s>", ":w<CR>", { desc = "Save" })
 
 -- Create a new buffer
-vim.keymap.set("n", "<leader>b", ":enew<CR>", { desc = "Create new Buffer" })
+-- vim.keymap.set("n", "<leader>b", ":enew<CR>", { desc = "Create new Buffer" })
 
 -- Open floating debug menu
 vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open floating diagnostic menu" })
+
+-- Using :Q as well to quit
+vim.api.nvim_create_user_command('Q', 'q', {})
 
 -- -- Command Key usage with iterm2 
 -- vim.keymap.set("i", "<C-1>", "<C-o>o", { desc =  "Open a new line below" })

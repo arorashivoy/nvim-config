@@ -17,10 +17,17 @@ telescope.load_extension("bibtex")
 --   })
 -- end
 
+telescope.setup({
+  defaults = {
+      file_ignore_patterns = {
+      "node_modules",
+      "venv",
+    }
+  },
+})
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Telescope Files" })
--- vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Telescope Grep" })
--- vim.keymap.set('n', '<leader>fg', '<cmd>lua fuzzyFindFiles{}<cr>', { desc = "Telescope Grep" })
+vim.keymap.set('n', '<leader>fr', builtin.live_grep, { desc = "Telescope Grep" })
 vim.keymap.set('n', '<leader>fg', builtin.current_buffer_fuzzy_find, { desc = "Telescope Grep" })
 vim.keymap.set('n', '<leader>fo', builtin.buffers, { desc = "Telescope Buffers" })
 vim.keymap.set('n', '<leader>fm', function() builtin.lsp_document_symbols() end, { desc = "Telescope Methods" })

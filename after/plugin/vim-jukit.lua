@@ -6,6 +6,8 @@ vim.g.jukit_highlight_markers = 0
 vim.g.jukit_enable_textcell_bg_hl = 0
 vim.g.jukit_convert_overwrite_default = 1
 vim.g.jukit_cellmarker_colors = 1
+-- vim.g.jukit_terminal = 'tmux'
+-- vim.g.jukit_inline_plotting = 1
 
 -------------------------------------------------
 -- Vim Jukit Color scheme present in color.lua --
