@@ -71,3 +71,5 @@ end
 
 vim.api.nvim_set_keymap("n", "<leader>ft", "<cmd>lua _floatingTerm_toggle()<CR>",
     { noremap = true, silent = true, desc = "Create floatingTerm Terminal" })
+
+vim.keymap.set("n", "<c-/>", ":ToggleTerm dir=%:p:h<CR>")
