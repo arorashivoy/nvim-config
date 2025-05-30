@@ -1,5 +1,5 @@
 local chat = require("CopilotChat")
-local prompts = require('CopilotChat.prompts')
+-- local prompts = require('CopilotChat.prompts')
 local select = require('CopilotChat.select')
 
 require('CopilotChat').setup {
@@ -7,7 +7,7 @@ require('CopilotChat').setup {
   proxy = nil, -- [protocol://]host[:port] Use this proxy
   allow_insecure = false, -- Allow insecure server connections
 
-  system_prompt = prompts.COPILOT_INSTRUCTIONS, -- System prompt to use
+  -- system_prompt = prompts.COPILOT_INSTRUCTIONS, -- System prompt to use
   model = 'gpt-4o', -- GPT model to use, 'gpt-3.5-turbo', 'gpt-4', or 'gpt-4o'
   -- temperature = 0.1, -- GPT temperature
 

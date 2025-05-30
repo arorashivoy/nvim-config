@@ -20,7 +20,7 @@ vim.keymap.set("n", "<C-l>", vim.cmd.TmuxNavigateRight, { desc = "Navigate Right
 vim.keymap.set("n", "<M-s>", ":w<CR>", { desc = "Save" })
 
 -- Create a new buffer
--- vim.keymap.set("n", "<leader>b", ":enew<CR>", { desc = "Create new Buffer" })
+vim.keymap.set("n", "<leader>b", ":enew<CR>", { desc = "Create new Buffer" })
 
 -- Open floating debug menu
 vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Open floating diagnostic menu" })

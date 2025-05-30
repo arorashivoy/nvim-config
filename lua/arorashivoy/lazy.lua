@@ -17,47 +17,47 @@ require("lazy").setup({
 
     -- Snack
     {
-      "folke/snacks.nvim",
-      priority = 1000,
-      lazy = false,
-      opts = {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        bigfile = { enabled = true },
-        quickfile = { enabled = true },
-        statuscolumn = { enabled = true },
-        words = { enabled = true },
-        bufdelete = { enabled = true },
-        dashboard = {
-          sections = {
-            { section = "header" },
-            {
-              pane = 2,
-              section = "terminal",
-              cmd = "colorscript -e square",
-              height = 5,
-              padding = 1,
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            bigfile = { enabled = true },
+            quickfile = { enabled = true },
+            statuscolumn = { enabled = true },
+            words = { enabled = true },
+            bufdelete = { enabled = true },
+            dashboard = {
+                sections = {
+                    { section = "header" },
+                    {
+                        pane = 2,
+                        section = "terminal",
+                        cmd = "colorscript -e square",
+                        height = 5,
+                        padding = 1,
+                    },
+                    { section = "keys", gap = 1, padding = 1 },
+                    { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+                    { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                    -- {
+                    --   pane = 2,
+                    --   icon = " ",
+                    --   title = "Git Status",
+                    --   section = "terminal",
+                    --   -- enabled = Snacks.git.get_root() ~= nil,
+                    --   cmd = "hub status --short --branch --renames",
+                    --   height = 5,
+                    --   padding = 1,
+                    --   ttl = 5 * 60,
+                    --   indent = 3,
+                    -- },
+                    { section = "startup" },
+                },
             },
-            { section = "keys", gap = 1, padding = 1 },
-            { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-            { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-            -- {
-            --   pane = 2,
-            --   icon = " ",
-            --   title = "Git Status",
-            --   section = "terminal",
-            --   -- enabled = Snacks.git.get_root() ~= nil,
-            --   cmd = "hub status --short --branch --renames",
-            --   height = 5,
-            --   padding = 1,
-            --   ttl = 5 * 60,
-            --   indent = 3,
-            -- },
-            { section = "startup" },
-          },
         },
-      },
     },
 
     -- default lazy plugins
@@ -117,7 +117,7 @@ require("lazy").setup({
 
 
     -- Treesitter
-    { "nvim-treesitter/nvim-treesitter",          build = ":TSUpdate" },
+    { "nvim-treesitter/nvim-treesitter",     build = ":TSUpdate" },
 
     -- UndoTree
     'mbbill/undotree',
@@ -169,7 +169,7 @@ require("lazy").setup({
     },
 
     -- Indetation Guide
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl",       opts = {} },
 
     -- Jupyter Notebook
     'luk400/vim-jukit',
@@ -179,14 +179,14 @@ require("lazy").setup({
     -- { "zbirenbaum/copilot.lua" },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "canary",
+        -- branch = "master",
         dependencies = {
-            { "github/copilot.vim" }, -- or github/copilot.vim
+            { "github/copilot.vim" },    -- or github/copilot.vim
             { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
         },
-        build = "make tiktoken",    -- Only on MacOS or Linux
+        build = "make tiktoken",         -- Only on MacOS or Linux
         opts = {
-            debug = true,           -- Enable debugging
+            debug = true,                -- Enable debugging
             -- See Configuration section for rest
         },
         -- See Commands section for default commands if you want to lazy load on them
@@ -232,8 +232,18 @@ require("lazy").setup({
     -- vim-illuminator
     'RRethy/vim-illuminate',
 
-    -- Live preview of Makrdown and Latex
-    'frabjous/knap',
+    -- -- Live preview of Makrdown and Latex
+    -- 'frabjous/knap',
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+            vim.g.mkdp_theme = "light"
+        end,
+        ft = { "markdown" },
+    },
 
     -- Mini plugins
     {
@@ -259,26 +269,26 @@ require("lazy").setup({
         end,
     },
 
-    -- Leetcode.nvim
-    {
-        "kawre/leetcode.nvim",
-        build = ":TSUpdate html",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-telescope/telescope.nvim",
-            "nvim-lua/plenary.nvim", -- required by telescope
-            "MunifTanjim/nui.nvim",
-
-            -- optional
-            "rcarriga/nvim-notify",
-            "nvim-tree/nvim-web-devicons",
-        },
-        opts = {
-            -- configuration goes here
-            arg = "leetcode.nvim",
-            lang = "cpp",
-        },
-    },
+    -- -- Leetcode.nvim
+    -- {
+    --     "kawre/leetcode.nvim",
+    --     build = ":TSUpdate html",
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "nvim-telescope/telescope.nvim",
+    --         "nvim-lua/plenary.nvim", -- required by telescope
+    --         "MunifTanjim/nui.nvim",
+    --
+    --         -- optional
+    --         "rcarriga/nvim-notify",
+    --         "nvim-tree/nvim-web-devicons",
+    --     },
+    --     opts = {
+    --         -- configuration goes here
+    --         arg = "leetcode.nvim",
+    --         lang = "cpp",
+    --     },
+    -- },
 
     -- -- Disable plugins for large files
     -- {
