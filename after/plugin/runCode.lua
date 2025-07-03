@@ -12,7 +12,7 @@ function runCodeInTerm()
     -- Python
     if vim.fn.expand('%:e') == 'py' then
         local runPythonCode = Terminal:new({
-            cmd = string.format('cd %s && python %s', vim.fn.expand('%:p:h'), vim.fn.expand('%:p:t')),
+            cmd = string.format('cd %s && python3.10 %s', vim.fn.expand('%:p:h'), vim.fn.expand('%:p:t')),
             hidden = true,
             direction = 'vertical',
             on_open = function(term)
