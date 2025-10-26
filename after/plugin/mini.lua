@@ -1,5 +1,5 @@
 -- require('mini.animate').setup()
 require('mini.sessions').setup()
-require('mini.surround').setup()
+-- require('mini.surround').setup()
 -- require('mini.comment').setup()
 require('mini.pairs').setup()

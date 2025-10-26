@@ -19,7 +19,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
@@ -36,8 +36,6 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.cursorline = true
 
-vim.cmd("set autoread")
-
-vim.cmd("set hlsearch")
+vim.opt.autoread = true
 
 -- vim.cmd("set linebreak")

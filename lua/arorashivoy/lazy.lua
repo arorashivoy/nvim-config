@@ -25,6 +25,7 @@ require("lazy").setup({
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
             bigfile = { enabled = true },
+            image = { enabled = true },
             quickfile = { enabled = true },
             statuscolumn = { enabled = true },
             words = { enabled = true },
@@ -126,21 +127,94 @@ require("lazy").setup({
     -- 'tpope/vim-fugitive',
     -- 'tpope/vim-rhubarb',
 
-    -- LSP
+    ---------
+    -- LSP --
+    ---------
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+    'L3MON4D3/LuaSnip',
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+        "williamboman/mason.nvim",
+        lazy = false,
+        config = function()
+            require("mason").setup()
+        end,
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        lazy = false,
+        opts = {
+            auto_install = true,
+        },
+    },
+    {
+        "neovim/nvim-lspconfig",
+        lazy = false,
+        config = function()
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            -- Autocompletion
-            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' },     -- Required
-            { 'hrsh7th/nvim-cmp' },     -- Required
-        }
+            local lspconfig = require("lspconfig")
+            lspconfig.sourcekit.setup {
+                cmd = { "xcrun", "sourcekit-lsp" },
+                filetypes = { "swift", "objective-c", "objective-cpp" },
+                root_dir = require('lspconfig.util').root_pattern("Package.swift", ".git"),
+                capabilities = capabilities,
+            }
+            lspconfig.ts_ls.setup({
+                capabilities = capabilities
+            })
+            lspconfig.solargraph.setup({
+                capabilities = capabilities
+            })
+            lspconfig.html.setup({
+                capabilities = capabilities
+            })
+            lspconfig.lua_ls.setup({
+                capabilities = capabilities
+            })
+
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP goto definition" })
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "LSP goto reference" })
+            vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
+            vim.keymap.set("n", "gf", vim.lsp.buf.format, { desc = "Format current buffer" })
+        end,
+    },
+
+    -- Dap (Debug Adapter Protocol)
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            "nvim-neotest/nvim-nio",
+            "williamboman/mason.nvim",
+            "jay-babu/mason-nvim-dap.nvim",
+            "wojciech-kulik/xcodebuild.nvim",
+        },
+        config = function()
+            local dap = require("dap")
+            local dapui = require("dapui")
+            local xcodebuild = require("xcodebuild.integrations.dap")
+
+            local codelldbPath = os.getenv("HOME") .. "/.tools/codelldb-darwin-arm64/extension/adapter/codelldb"
+
+            dapui.setup()
+            xcodebuild.setup(codelldbPath)
+
+            dap.listeners.before.attach.dapui_config = function()
+                dapui.open()
+            end
+            dap.listeners.before.launch.dapui_config = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated.dapui_config = function()
+                dapui.close()
+            end
+
+            vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP Toggle Breakpoint" })
+            vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP Continue" })
+        end,
+
     },
 
     -- Git Signs
@@ -251,6 +325,9 @@ require("lazy").setup({
         version = false
     },
 
+    -- Surround
+    "tpope/vim-surround",
+
     -- Toggle Term
     { 'akinsho/toggleterm.nvim', version = "*", config = true },
 
@@ -289,6 +366,51 @@ require("lazy").setup({
     --         lang = "cpp",
     --     },
     -- },
+
+    ------------------------------
+    -- Xcode integration plugin --
+    ------------------------------
+    {
+        "wojciech-kulik/xcodebuild.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "MunifTanjim/nui.nvim",
+        },
+        integrations = {
+            xcodebuild_offline = {
+                enabled = true,
+            },
+        },
+        config = function()
+            require("xcodebuild").setup({
+                code_coverage = {
+                    enabled = true,
+                },
+                pymobiledevice = {
+                    enabled = true,
+                },
+                xcodebuild_offline = {
+                    enabled = true,
+                },
+            })
+
+            vim.keymap.set("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle Xcodebuild Logs" })
+            vim.keymap.set("n", "<leader>xb", "<cmd>XcodebuildBuild<cr>", { desc = "Build Project" })
+            vim.keymap.set("n", "<leader>xr", "<cmd>XcodebuildBuildRun<cr>", { desc = "Build & Run Project" })
+            vim.keymap.set("n", "<leader>xt", "<cmd>XcodebuildTest<cr>", { desc = "Run Tests" })
+            vim.keymap.set("n", "<leader>xT", "<cmd>XcodebuildTestClass<cr>", { desc = "Run This Test Class" })
+            vim.keymap.set("n", "<leader>X", "<cmd>XcodebuildPicker<cr>", { desc = "Show All Xcodebuild Actions" })
+            vim.keymap.set("n", "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select Device" })
+            vim.keymap.set("n", "<leader>xp", "<cmd>XcodebuildSelectTestPlan<cr>", { desc = "Select Test Plan" })
+            vim.keymap.set("n", "<leader>xc", "<cmd>XcodebuildToggleCodeCoverage<cr>", { desc = "Toggle Code Coverage" })
+            vim.keymap.set("n", "<leader>xC", "<cmd>XcodebuildShowCodeCoverageReport<cr>",
+                { desc = "Show Code Coverage Report" })
+            vim.keymap.set("n", "<leader>xq", "<cmd>Telescope quickfix<cr>", { desc = "Show QuickFix List" })
+            vim.keymap.set("n", "<leader>xs", "<cmd>XcodebuildSetup<cr>", { desc = "Setup Xcodebuild Setup" })
+            vim.keymap.set("n", "<leader>xh", "<cmd>XcodebuildPreviewGenerateAndShow hotReload<cr>",
+                { desc = "Generate & Show Hot Reload Preview" })
+        end,
+    },
 
     -- -- Disable plugins for large files
     -- {

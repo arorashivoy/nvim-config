@@ -1,7 +1,8 @@
 vim.cmd(
 [[
 function! OpenMarkdownPreview (url)
-  execute "silent ! chrome --new-window --app=" . a:url
+  echo "Opening URL: " . a:url
+  execute "silent ! open -a Safari " . a:url
 endfunction
 ]]
 )

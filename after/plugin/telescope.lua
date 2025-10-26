@@ -27,10 +27,13 @@ telescope.setup({
 })
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Telescope Files" })
-vim.keymap.set('n', '<leader>fr', builtin.live_grep, { desc = "Telescope Grep" })
-vim.keymap.set('n', '<leader>fg', builtin.current_buffer_fuzzy_find, { desc = "Telescope Grep" })
+vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = "Telescope Grep" })
+vim.keymap.set('n', '<leader>fg', builtin.current_buffer_fuzzy_find, { desc = "Telescope Grep current file" })
+vim.keymap.set("n", "<leader>ft", vim.cmd.TodoTelescope, { desc = "List all TODOs" })
 vim.keymap.set('n', '<leader>fo', builtin.buffers, { desc = "Telescope Buffers" })
 vim.keymap.set('n', '<leader>fm', function() builtin.lsp_document_symbols() end, { desc = "Telescope Methods" })
+vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>lua _floatingTerm_toggle()<CR>", { desc = "Floating Terminal" })
+vim.api.nvim_set_keymap("n", "<leader>fu", "<cmd>lua _lazygit_toggle()<CR>", { desc = "LazyGit" })
 
 -- -- Telescope Project
 -- vim.api.nvim_set_keymap(

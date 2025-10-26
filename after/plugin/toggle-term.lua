@@ -49,8 +49,6 @@ function _lazygit_toggle()
     lazygit:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>",
-    { noremap = true, silent = true, desc = "Create lazygit Terminal" })
 
 -- Floating Terminal
 local floatingTerm = Terminal:new({
@@ -69,7 +67,5 @@ function _floatingTerm_toggle()
     floatingTerm:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>ft", "<cmd>lua _floatingTerm_toggle()<CR>",
-    { noremap = true, silent = true, desc = "Create floatingTerm Terminal" })
 
 vim.keymap.set("n", "<c-/>", ":ToggleTerm dir=%:p:h<CR>")
